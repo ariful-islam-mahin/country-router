@@ -10,16 +10,21 @@ const CountryDetail = () => {
     useEffect(() => {
         fetch(`https://restcountries.eu/rest/v2/name/${countryName}`)
         .then(res => res.json())
-        .then(data => setCountry(data))
+        .then(data => setCountry(data[0]))
     }, []);
-    
-    const {name, population, region, capital} = country[0];
-    
-    console.log(name, population, region, capital)
-    
+    console.log(country)
+    const {name, capital, nativeName, population, region, flag} = country
     return (
-        <div>
-            <h3>Details of {countryName}</h3>
+        <div className='container text-center'>
+            <h3 className='my-3'>Details of: {countryName}</h3>
+            <div className='border p-4 m-4 rounded bg-light text-left'>
+                <img className='w-50 my-3' src={flag} alt=""/>
+                <h2 className='my-3'>Name: {name}</h2>
+                <h4>Native Name: {nativeName}</h4>
+                <h4>Capital: {capital}</h4>
+                <h4>Region: {region}</h4>
+                <h4>Population: {population}</h4>
+            </div>
         </div>
     );
 };
